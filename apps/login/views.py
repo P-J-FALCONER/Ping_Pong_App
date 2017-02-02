@@ -13,28 +13,28 @@ def register(request):
     reg_birthday = request.POST['birthday']
     reg_password = request.POST['password']
     reg_confirm = request.POST['confirm']
-
     errors = []
     errors += Players.objects.validate_user(reg_username, reg_first_name, reg_last_name, reg_email, reg_birthday, reg_password, reg_confirm)
-    
     if len(errors) == 0:
         errors = Players.objects.create_user(reg_username, reg_first_name, reg_last_name, reg_email, reg_birthday, reg_password)
         if len(errors) == 0:
-            return redirect('login:success')
-    
+            request.session['status']=True
+            request.session['id']=errors.id
+            request.session['name']=errors.first_name
+            return redirect('ping_pong:index')
     for e in errors:
         messages.add_message(request, messages.ERROR, e)
-        
     return redirect('login:index')
-
-def success(request):
-    return HttpResponse("SUCCESSFULLY CREATED USER")
 
 def authenticate(request):
     login_username = request.POST['username_login']
     login_password = request.POST['password_login']
     if Players.objects.authenticate_user(login_username, login_password):
-        return redirect('login:success')
+        u = Players.objects.get(username=login_username)
+        request.session['id']=u.id
+        request.session['name']=u.first_name
+        request.session['status']=True
+        return redirect('ping_pong:index')
     else:
         messages.add_message(request, messages.ERROR, 'invalid login')
         return redirect('login:index')
