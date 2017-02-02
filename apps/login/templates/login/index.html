@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login/Register</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script> 
+  		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			{% for m in messages %}
+				<h5 class="red-text">{{m}}</h5>
+			{% endfor %}
+			<dir class="row">
+				<dir class="col l4 m4 s12">
+					<h3>Login</h3>
+					<form method="POST" action="/login">
+						{% csrf_token %}
+						<label for="username_login">Username:</label>
+						<input type="text" name="username_login">
+						<label for="password_login">Password:</label>
+						<input type="password" name="password_login">
+						<button type="submit">Login</button>
+					</form>
+				</dir>
+				<div class="col l6 m6 s12">
+					<h3>Register</h3>
+					<form method="POST" action="/register">
+						{% csrf_token %}
+						<label>First Name:</label>
+						<input type="text" name="first_name" required>
+						<label for="last_name">Last Name:</label>
+						<input type="text" name="last_name" required>
+						<label for="username">Username:</label>
+						<input type="text" name="username" required>
+						<label for="email">Email:</label>
+						<input type="email" name="email" required>
+						<label for="birthday">Birthday:</label>
+						<input type="date" name="birthday" required>
+						<label for="password">Password:</label>
+						<input type="password" name="password" required>
+						<label for="confirm">Confirm Password:</label>
+						<input type="password" name="confirm" required>
+						<label for="picture">Profile Picture</label>
+						<input style="margin: 1em;" type="file" name="picture">
+						<button type="submit">Register Account</button>
+					</form>
+				</div>
+			</dir>	
+		</div>
+	</body>
+</html>
