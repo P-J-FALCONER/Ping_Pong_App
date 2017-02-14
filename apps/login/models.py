@@ -52,5 +52,4 @@ class Players(models.Model):
 	email = models.CharField(max_length=255)
 	birthday = models.DateField()
 	password = models.CharField(max_length=255)
-	league = models.ManyToManyField('ping_pong.Leagues')
 	objects = PlayersManager()

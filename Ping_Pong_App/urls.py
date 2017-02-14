@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-		url(r'^', include('apps.login.urls', namespace='login')),
-		url(r'^users$', include('apps.ping_pong.urls', namespace='ping_pong')),
+	url(r'^', include('apps.login.urls', namespace='login')),
+	url(r'^', include('apps.ping_pong.urls', namespace='ping_pong')),
     url(r'^admin/', admin.site.urls),
 ]

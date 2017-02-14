@@ -38,3 +38,7 @@ def authenticate(request):
     else:
         messages.add_message(request, messages.ERROR, 'invalid login')
         return redirect('login:index')
+
+def logout(request):
+    request.session.flush()
+    return redirect('login:index')
